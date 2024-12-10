@@ -1,9 +1,10 @@
-import { IsEmail,IsNotEmpty, IsString, MaxLength, MinLength, } from "class-validator";
+import { IsEmail,IsIn,IsNotEmpty, IsString, MaxLength, MinLength, } from "class-validator";
 
-export type Rol = 'Admin' | 'User'
+export type Rol = 'Admin' | 'User' | 'Seller'
 
 export class CreateUserDto{
     @IsString()
+    @IsNotEmpty()
     username: string;
 
     @IsEmail()
@@ -15,6 +16,7 @@ export class CreateUserDto{
     @MaxLength(14)
     password: string;
 
-    Rol: Rol;
+    @IsIn(['Admin','User','Seller'])
+    rol: Rol;
 
 }

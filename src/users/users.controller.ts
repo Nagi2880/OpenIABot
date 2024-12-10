@@ -1,15 +1,13 @@
-import { Body, Controller, Get, Post, Req } from '@nestjs/common';
-import { Request } from 'express';
-import { CreateUserDto } from './users.dto';
+import {Controller, Get,} from '@nestjs/common';
+import { UsersService } from './users.service';
 
-@Controller('users')
+@Controller('api')
 export class UsersController {
-    @Get('allusers')
-    FindAllUsers(@Req() req: Request): string{
-        return 'there are all users :)'
+    constructor(private readonly userService: UsersService){}
+    
+    @Get('users')
+    FindallUsers(){
+        return this.userService.FindUsers()
     }
-    @Post()
-    CreateUser(@Body() UserDto: CreateUserDto): string{
-        return `New user created with the username ${UserDto.username}`
-    }
+    
 }
